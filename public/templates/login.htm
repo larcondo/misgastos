@@ -1,0 +1,17 @@
+<div>
+  <h1 class="titulo">Login</h1>
+
+  <div class="login-form">
+    <div class="login-campo">
+      <input type="text" name="" id="login-username" placeholder="User name" ng-model="loginData.name" ng-change="userChange()">
+      <p class="login-error-text">{{ errorTexts.user }}</p>
+    </div>
+    <div class="login-campo">
+      <input type="password" name="" id="login-password" placeholder="Password" ng-model="loginData.password" ng-change="passwordChange()">
+      <p class="login-error-text">{{ errorTexts.password }}</p>
+    </div>
+    <button class="login-boton" ng-click="login()">Loguearse</button>
+    <p style="font-size: 0.8rem; margin: 20px 0 0 0;">¿No tienes un usuario aún? <a href="#!register">Regístrate!</a></p>
+  </div>
+
+</div>

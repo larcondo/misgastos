@@ -1,0 +1,163 @@
+<div ng-show="user.name === null || user.name === undefined">
+  <p style="text-align: center;">Por favor, loguearse para ver sus pagos.</p>
+</div>
+
+<div ng-show="user.name !== null">
+  <h1 class="titulo">Pagos</h1>
+  
+  <div class="contenedor-filtros">
+    
+    <div class="filtro">
+      <label for="">Filtro 1</label>
+      <select name="" id="" ng-model="filtros.tipo" ng-change="filtrar()">
+        <option value="{{op}}" ng-repeat="op in filtroTipo track by $index">{{ op }}</option>
+      </select>
+    </div>
+    <div class="filtro">
+      <label for="">Filtro 2</label>
+      <select name="" id="" ng-model="filtros.detalle" ng-change="filtrar()">
+        <option value="{{op}}" ng-repeat="op in filtroDetalle track by $index">{{ op }}</option>
+      </select>
+    </div>
+    <div class="filtro">
+      <label for="">Filtro 3</label>
+      <input type="text" name="filtroObs" id="filtroObs" ng-model="filtros.observaciones" ng-change="filtrar()">
+    </div>
+    <div class="info-resultados">
+      <p style="margin: 0; font-size: 0.8rem;">Resultados: {{ pagosData.length }}</p>
+      <p style="margin: 0; font-size: 0.8rem;">Total: {{ numberToCurrency(sumaImporte) }}</p>
+    </div>
+  
+    <div class="contenedor-botones">
+      <button ng-click="modalAdd(true)" class="boton-add" title="Nuevo Pago">+</button>
+    </div>
+  </div>  
+
+  <div class="contenedor-tabla">
+    <table class="tabla-pagos">
+      <tr>
+        <th>Tipo</th>
+        <th ng-click="ordenarPorFecha()" class="header-sort" title="Ordenar por Fecha">Fecha</th>
+        <th>Detalle</th>
+        <th ng-click="ordenarPorImporte()" class="header-sort" title="Ordenar por Importe">Importe</th>
+        <th>Vencimiento</th>
+        <th>Observaciones</th>
+        <th></th>
+      </tr>
+      <tr ng-repeat="pago in pagosData">
+        <td>{{ pago.tipo }}</td>
+        <td>{{ pago.fecha }}</td>
+        <td>{{ pago.detalle }}</td>
+        <td>{{ numberToCurrency(pago.importe) }}</td>
+        <td>{{ pago.vencimiento }}</td>
+        <td>{{ pago.observaciones }}</td>
+        <!-- <td><button ng-click="eliminarPago(pago._id)" style="height: 16px; font-size: 0.65rem;">X</button></td> -->
+        <td class="celda-botones" style="padding: 0;">
+          <button class="boton-tabla boton-delete" ng-click="modalDelete(true, pago._id)"><i class="bi bi-trash-fill"></i></button>
+          <button class="boton-tabla boton-update" ng-click="modalUpdate(true, pago._id)"><i class="bi bi-pencil-fill"></i></button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+  <div id="modal-delete" class="modal" ng-show="displayModal.delete">
+    <div class="modal-header">
+      <p>¿Está seguro que quiere eliminar el siguiente dato?</p>
+    </div>
+    <table class="tabla-modal">
+      <tr><td style="width: 150px;">Tipo:</td><td>{{ pagosData[index].tipo }}</td></tr>
+      <tr><td>Fecha:</td><td>{{ pagosData[index].fecha }}</td></tr>
+      <tr><td>Detalle:</td><td>{{ pagosData[index].detalle }}</td></tr>
+      <tr><td>Importe:</td><td>{{ pagosData[index].importe }}</td></tr>
+      <tr><td>Vencimiento:</td><td>{{ pagosData[index].vencimiento }}</td></tr>
+    </table>
+    <div>
+      <button class="boton" ng-click="modalDelete(false)">No, cancelar</button>
+      <button class="boton" ng-click="eliminarPago(pagosData[index]._id)">Si, eliminar</button>
+    </div>
+  </div>
+
+  <div id="modal-update" class="modal" ng-show="displayModal.update">
+    <div class="modal-header">
+      <p>Editar el siguiente pago: </p>
+    </div>
+    <div class="recuadro-input">
+      <label for="">Tipo:</label>
+      <select name="" id="" ng-model="tempPago.tipo" class="input-modal-edit">
+        <option value="pago">Pago</option>
+        <option value="divisas">Divisas</option>
+      </select>
+    </div>
+    <div class="recuadro-input">
+      <label for="">Fecha:</label>
+      <!-- <input type="text" class="input-modal-edit" name="" id="" ng-model="tempPago.fecha"> -->
+      <input type="date" class="input-modal-edit" ng-model="tempPago_fecha" name="" id="">
+    </div>
+    <div class="recuadro-input">
+      <label for="">Detalle:</label>
+      <input type="text" class="input-modal-edit" name="" id="" ng-model="tempPago.detalle">
+    </div>
+    <div class="recuadro-input">
+      <label for="">Importe</label>
+      <input type="number" class="input-modal-edit" name="" id="" ng-model="tempPago.importe" step="0.01">
+    </div>
+    <div class="recuadro-input">
+      <label for="">Vencimiento:</label>
+      <input type="text" class="input-modal-edit" name="" id="" ng-model="tempPago.vencimiento">
+    </div>
+    <div class="recuadro-input">
+      <label for="">Observaciones:</label>
+      <input type="text" class="input-modal-edit" name="" id="" ng-model="tempPago.observaciones">
+    </div>
+    <div>
+      <button class="boton" ng-click="modalUpdate(false)">Cancelar</button>
+      <button class="boton" ng-click="actualizarPago(index)">Actualizar</button>
+    </div>
+  </div>
+
+  <div id="modal-add" class="modal" ng-show="displayModal.add">
+    <div class="modal-header">
+      <p>Agregar el siguiente pago:</p>
+    </div>
+    <!-- Tipo -->
+    <div class="recuadro-input">
+      <label for="">Tipo:</label>
+      <select ng-model="nuevoPago.tipo" class="input-modal-edit" name="" id="">
+        <option value=""></option>
+        <option value="pago">Pago</option>
+        <option value="divisas">Divisas</option>
+      </select>
+    </div>
+    <!-- Fecha -->
+    <div class="recuadro-input">
+      <label for="">Fecha:</label>
+      <input type="date" ng-model="nuevoPago.fecha" class="input-modal-edit" name="" id="" >
+    </div>
+    <!-- Detalle -->
+    <div class="recuadro-input">
+      <label for="">Detalle:</label>
+      <input type="text" ng-model="nuevoPago.detalle" class="input-modal-edit" name="" id="">
+    </div>
+    <!-- Importe -->
+    <div class="recuadro-input">
+      <label for="">Importe:</label>
+      <input type="number" ng-model="nuevoPago.importe" class="input-modal-edit" name="" id="" step="0.01">
+    </div>
+    <!-- Vencimiento -->
+    <div class="recuadro-input">
+      <label for="">Vencimiento:</label>
+      <input type="date" ng-model="nuevoPago.vencimiento" class="input-modal-edit" name="" id="">
+    </div>
+    <!-- Observaciones -->
+    <div class="recuadro-input">
+      <label for="">Observaciones:</label>
+      <input type="text" ng-model="nuevoPago.observaciones" class="input-modal-edit" name="" id="" >
+    </div>
+    <div>
+      <button class="boton" ng-click="modalAdd(false)">Cancelar</button>
+      <button class="boton" ng-click="limpiarCampos()">Borrar</button>
+      <button class="boton" ng-click="guardarPago()">Guardar</button>
+    </div>
+  </div>
+
+</div>

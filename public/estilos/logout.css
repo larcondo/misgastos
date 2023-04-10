@@ -1,0 +1,17 @@
+.logout-form {
+  margin: 20px auto;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+}
+.logout-boton {
+  padding: 5px 20px;
+  border: 1px solid #555;
+  border-radius: 10px;
+  background-color: #ddd;
+}
+
+.logout-boton:hover{
+  cursor: pointer;
+  background-color: #bbb;
+}

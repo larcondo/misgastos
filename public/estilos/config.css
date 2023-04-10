@@ -1,0 +1,21 @@
+.tabla-config {
+  border-collapse: collapse;
+  margin: 30px auto;
+  height: fit-content;
+  width: 50%;
+}
+
+.tabla-config tr {
+  height: 20px;
+}
+
+.tabla-config th, .tabla-config td {
+  padding: 4px 16px;
+}
+
+.tabla-config tr:nth-child(odd) {
+  background-color: #ddd;
+}
+.tabla-config tr:nth-child(even) {
+  background-color: #eee;
+}

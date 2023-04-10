@@ -1,0 +1,30 @@
+<div>
+  <h1 class="titulo">Configuraciones</h1>
+
+  <table class="tabla-config">
+    <tr><td>Nombre de Usuario:</td><td ng-bind="user.name"></td><td></td></tr>
+    <tr><td>Nombre:</td><td ng-bind="user.firstName"></td>
+      <td>
+        <button class="boton-tabla boton-update" title="Modificar Nombre">
+          <i class="bi bi-pencil-fill"></i>
+        </button>
+      </td>
+    </tr>
+    <tr><td>Apellido:</td><td ng-bind="user.lastName"></td>
+      <td>
+        <button class="boton-tabla boton-update" title="Modificar Apellido">
+          <i class="bi bi-pencil-fill"></i>
+        </button>
+      </td>
+    </tr>
+    <tr><td>E-mail:</td><td ng-bind="user.email"></td>
+      <td>
+        <button class="boton-tabla boton-update" title="Modificar E-mail">
+          <i class="bi bi-pencil-fill"></i>
+        </button>
+      </td>
+    </tr>
+    <tr><td>Rol:</td><td ng-bind="user.role"></td><td></td></tr>
+  </table>
+
+</div>

@@ -1,0 +1,25 @@
+<div>
+  <h1 class="titulo">Registro de Usuario</h1>
+
+  <div class="register-form">
+    <div class="register-campo">
+      <input type="text" name="" id="register-fName" placeholder="Nombre" ng-model="registerData.firstName">      
+    </div>
+    <div class="register-campo">
+      <input type="text" name="" id="register-lName" placeholder="Apellido" ng-model="registerData.lastName">
+    </div>
+    <div class="register-campo">
+      <input type="email" name="" id="register-email" placeholder="example@domain.com" ng-model="registerData.email" ng-change="changeField('email')">
+    </div>
+    <p ng-bind="registerMessages.email" class="register-error-text"></p>
+    <div class="register-campo">
+      <input type="text" name="" id="register-name" placeholder="Nombre de usuario" ng-model="registerData.name" ng-change="changeField('name')">
+    </div>
+    <p ng-bind="registerMessages.name" class="register-error-text"></p>
+    <div class="register-campo">
+      <input type="password" name="" id="register-password" ng-model="registerData.password" ng-change="changeField('password')">
+    </div>
+    <p ng-bind="registerMessages.password" class="register-error-text"></p>
+    <button class="register-boton" ng-click="register()">Registrarse</button>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+.login-form {
+  width: 300px;
+  margin: 20px auto;
+  padding: 30px 0px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  background-color: lightblue;
+  border-radius: 20px;
+}
+
+.login-campo {
+  margin: 0 0 20px 0;
+}
+
+.login-campo input[type="text"],
+.login-campo input[type="password"] {
+  font-family: 'Work Sans', sans-serif;
+  width: 240px;
+  padding: 4px;
+}
+
+.login-boton {
+  padding: 5px 20px;
+  border: 1px solid #555;
+  border-radius: 10px;
+  background-color: #ddd;
+}
+
+.login-boton:hover{
+  cursor: pointer;
+  background-color: #bbb;
+}
+
+.login-error-text {
+  margin: 4px 0 4px 0;
+  padding: 0;
+  font-size: 0.8rem;
+}

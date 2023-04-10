@@ -1,0 +1,49 @@
+.register-form {
+  width: 300px;
+  margin: 20px auto;
+  padding: 30px 0px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  background-color: lightblue;
+  border-radius: 20px;
+}
+
+.register-campo {
+  margin: 0 0 20px 0;
+}
+
+.register-boton {
+  padding: 5px 20px;
+  border: 1px solid #555;
+  border-radius: 10px;
+  background-color: #ddd;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.register-boton:hover{
+  cursor: pointer;
+  background-color: #bbb;
+}
+
+.register-campo input[type="text"] {
+  font-family: 'Work Sans', sans-serif;
+  width: 240px;
+  padding: 4px;
+}
+.register-campo input[type="email"] {
+  font-family: 'Work Sans', sans-serif;
+  width: 240px;
+  padding: 4px;
+}
+.register-campo input[type="password"] {
+  font-family: 'Work Sans', sans-serif;
+  width: 240px;
+  padding: 4px;
+}
+
+.register-error-text {
+  margin: 4px 0 4px 0;
+  padding: 0;
+  font-size: 0.8rem;
+}

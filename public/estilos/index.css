@@ -1,0 +1,191 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.contenedor-principal {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  /* height: 100%; */
+  width: 100%;
+  /* grid-template-rows: 100px repeat(10, 80px) 100px; */
+  grid-template-rows: 100px repeat(10, minmax(80px, 1fr)) 100px;
+  grid-template-columns: repeat(10, 10%);
+}
+
+.contenedor-encabezado {
+  /* background-color: lightblue; */
+  background-color: #efefef;
+  margin: 0;
+  grid-area: span 1 / span 10;
+}
+
+.contenedor-encabezado h1 {
+  margin: 0;
+  padding: 0 50px;
+  text-align: right;
+}
+
+.contenedor-navegador {
+  /* background-color: lightgreen; */
+  background-color: #e5e5e5;
+  margin: 0;
+  grid-area: span 10 / span 1;
+  display: flex;
+  flex-flow: column wrap;
+  padding: 0px;
+}
+
+.contenedor-navegador a {
+  text-decoration: none;
+  padding: 8px 8px;
+  font-size: 0.9rem;
+  color: #222;
+}
+
+.contenedor-navegador a:hover {
+  color: #555;
+}
+
+.contenedor-navegador .active {
+  /* background-color: hsl(120, 73%, 72%); */
+  /* border-right: 4px solid hsl(120, 73%, 45%); */
+  background-color: hsl(240, 38%, 54%);
+  border-right: 4px solid hsl(240, 38%, 34%);;
+  color: #e5e5e5;
+}
+.contenedor-navegador .active:hover {
+  color: white;
+}
+
+
+.contenedor-rutas {
+  background-color: #f5f5f5;
+  margin: 0;
+  grid-area: span 10 / span 9;
+  padding: 20px;
+}
+
+.contenedor-rutas h1 {
+  margin: 0;
+}
+
+.contenedor-footer {
+  /* background-color: lightpink; */
+  background-color: #efefef;
+  margin: 0;
+  grid-area: span 1 / span 10;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.titulo {
+  text-align: center;
+}
+
+.boton {
+  /* width: 150px; */
+  padding: 5px 20px;
+  border: 1px solid #555;
+  border-radius: 10px;
+  background-color: #ddd;
+}
+
+.boton:hover{
+  cursor: pointer;
+  background-color: #bbb;
+}
+
+.boton-tabla {
+  margin: 0;
+  /* height: 16px; */
+  /* font-size: 0.65rem; */
+  width: fit-content;
+}
+
+.boton-tabla:hover {
+  cursor: pointer;
+}
+
+.boton-delete {
+  background-color: #b87d7d;
+  color: white;
+  height: 22px;
+  /* width: 20px; */
+  border: none;
+  border-radius: 50%;
+  font-size: 0.7rem;
+}
+
+.boton-delete:hover {
+  background-color: #ac6767;
+}
+
+.boton-delete:active {
+  background-color: #c49393;
+}
+
+.boton-update {
+  background-color: #77b3c8;
+  color: white;
+  height: 22px;
+  border: none;
+  border-radius: 50%;
+  font-size: 0.7rem;
+}
+.boton-update:hover{ background-color: #61a7bf;}
+.boton-update:active{ background-color: #8ec0d2;}
+
+.recuadro-input {
+  width: 80%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-modal-edit{
+  /* background-color: #454599; */
+  text-align: right;
+  padding: 2px 6px;
+  margin: 4px 0;
+  border-radius: 4px;
+  border: 1px solid #9d9d9d;
+  width: 40%;
+}
+
+
+.oculto {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.visible-flex {
+  display: flex;
+}
+
+@media screen and ( max-width: 1200px ) {
+  .contenedor-navegador {
+    grid-area: span 1 / span 10;
+    display: flex;
+    flex-flow: row wrap;
+    padding: 10px;
+    justify-content: space-around;
+    align-content: center;
+  }
+
+  .contenedor-rutas {
+    grid-area: span 9 / span 10;
+  }
+ 
+}
+
+@media screen and ( max-width: 1000px ) {
+  
+}

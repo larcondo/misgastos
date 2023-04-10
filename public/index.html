@@ -1,0 +1,129 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="/public/estilos/index.css">
+  <link rel="stylesheet" href="/public/estilos/pagos.css">
+  <link rel="stylesheet" href="/public/estilos/plazosfijos.css">
+  <link rel="stylesheet" href="/public/estilos/login.css">
+  <link rel="stylesheet" href="/public/estilos/logout.css">
+  <link rel="stylesheet" href="/public/estilos/config.css">
+  <link rel="stylesheet" href="/public/estilos/register.css">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  
+  <title>Mis Pagos</title>
+</head>
+<body>
+  <div ng-app="myApp" ng-controller="mainCtrl" class="contenedor-principal">
+    <div class="contenedor-encabezado">
+      <h1>Mis Pagos</h1>
+      <h3 style="text-align: right; padding: 0 50px;" ng-bind="user.name"></h3>
+    </div>   
+
+    <div class="contenedor-navegador">
+      <a href="#/" class="{{ (wActive === 0 ? 'active' : '') }}">
+        Home
+      </a>
+      <a href="#!pagos" class="{{ (wActive === 1 ? 'active' : '') }}">
+        Pagos
+      </a>
+      <a href="#!plazosfijos" class="{{ (wActive === 2 ? 'active' : '') }}">
+        Plazos Fijos
+      </a>
+      <a href="#!login" class="{{ (wActive === 3 ? 'active' : '') }}" ng-show="user.name === null">
+        Login
+      </a>
+      <a href="#!config" class="{{ (wActive === 4 ? 'active' : '') }}" ng-show="user.name !== null">
+        Configuraciones
+      </a>
+      <a href="#!logout" class="{{ (wActive === 5 ? 'active' : '') }}" ng-show="user.name !== null">
+        Logout
+      </a>
+    </div>
+    
+    <!-- Rutas (Paginas) -->
+    <div ng-view class="contenedor-rutas"></div>
+
+    <div class="contenedor-footer">
+      <p>Creado por: Lucas</p>
+    </div>
+
+  </div>
+
+  <script>
+    var app = angular.module('myApp', ["ngRoute"]);
+
+    app.run(function($rootScope) {
+      $rootScope.wActive = null;
+      $rootScope.user = {
+        name: null, token: null, email: null, firstName: null, lastName: null, role: null
+      }
+      
+      for(let key in $rootScope.user){
+        if (sessionStorage.getItem(key) !== undefined) $rootScope.user[key] = sessionStorage.getItem(key)
+      }
+      
+    });
+
+    app.controller('mainCtrl', function($scope, $http, $rootScope){
+      
+    });
+    
+    app.config(['$routeProvider', function($routeProvider){
+      $routeProvider
+      .when('/',{
+        templateUrl: "./public/templates/home.htm",
+        controller: "homeCtrl"
+      })
+      .when('/pagos',{
+        templateUrl: "./public/templates/pagos.htm",
+        controller: "pagosCtrl"
+      })
+      .when('/plazosfijos',{
+        templateUrl: "./public/templates/plazosfijos.htm",
+        controller: "plazosFijosCtrl"
+      })
+      .when('/register',{
+        templateUrl: "./public/templates/register.htm",
+        controller: "registerCtrl"
+      })
+      .when('/login',{
+        templateUrl: "./public/templates/login.htm",
+        controller: "loginCtrl"
+      })
+      .when('/config',{
+        templateUrl: "./public/templates/config.htm",
+        controller: "configCtrl"
+      })      
+      .when('/logout',{
+        templateUrl: "./public/templates/logout.htm",
+        controller: "logoutCtrl"
+      });
+
+    }]);
+
+  </script>
+  <script src="./public/controllers/homeCtrl.js"></script>
+  <script src="./public/controllers/pagosCtrl.js"></script>
+  <script src="./public/controllers/plazosFijosCtrl.js"></script>
+  <script src="./public/controllers/loginCtrl.js"></script>
+  <script src="./public/controllers/registerCtrl.js"></script>
+  <script src="./public/controllers/configCtrl.js"></script>
+  <script src="./public/controllers/logoutCtrl.js"></script>
+
+</body>
+</html>
