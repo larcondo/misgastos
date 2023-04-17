@@ -16,7 +16,6 @@
   <!-- Estilos -->
   <link rel="stylesheet" href="/public/estilos/index.css">
   <link rel="stylesheet" href="/public/estilos/pagos.css">
-  <!-- <link rel="stylesheet" href="/public/estilos/plazosfijos.css"> -->
   <link rel="stylesheet" href="/public/estilos/login.css">
   <link rel="stylesheet" href="/public/estilos/logout.css">
   <link rel="stylesheet" href="/public/estilos/config.css">
@@ -41,9 +40,6 @@
       <a href="#!pagos" class="{{ (wActive === 1 ? 'active' : '') }}">
         Pagos
       </a>
-      <!-- <a href="#!plazosfijos" class="{{ (wActive === 2 ? 'active' : '') }}">
-        Plazos Fijos
-      </a> -->
       <a href="#!login" class="{{ (wActive === 3 ? 'active' : '') }}" ng-show="user.name === null">
         Login
       </a>
@@ -93,10 +89,6 @@
         templateUrl: "./public/templates/pagos.htm",
         controller: "pagosCtrl"
       })
-      // .when('/plazosfijos',{
-      //   templateUrl: "./public/templates/plazosfijos.htm",
-      //   controller: "plazosFijosCtrl"
-      // })
       .when('/register',{
         templateUrl: "./public/templates/register.htm",
         controller: "registerCtrl"
@@ -119,7 +111,6 @@
   </script>
   <script src="./public/controllers/homeCtrl.js"></script>
   <script src="./public/controllers/pagosCtrl.js"></script>
-  <!-- <script src="./public/controllers/plazosFijosCtrl.js"></script> -->
   <script src="./public/controllers/loginCtrl.js"></script>
   <script src="./public/controllers/registerCtrl.js"></script>
   <script src="./public/controllers/configCtrl.js"></script>
