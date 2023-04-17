@@ -71,7 +71,7 @@
     <div class="modal-header">
       <p>¿Está seguro que quiere eliminar el siguiente dato?</p>
     </div>
-
+    <!-- Informacion del Plazo a Eliminar -->
     <table class="tabla-modal">
       <tr><td>Tipo</td><td>{{ pfToDelete.tipo }}</td></tr>
       <tr><td>Plazo</td><td>{{ pfToDelete.plazo }}</td></tr>
@@ -81,6 +81,7 @@
       <tr><td>Intereses</td><td>{{ formatoDinero(pfToDelete.intereses) }}</td></tr>
       <tr><td>Activo</td><td>{{ (pfToDelete.activo === 'true') ? 'Sí' : 'No' }}</td></tr>
     </table>
+    <!-- Botones -->
     <div>
       <button class="boton" ng-click="modalDelete(false)">No, cancelar</button>
       <button class="boton" ng-click="eliminarPlazoFijo()">Sí, eliminar</button>
@@ -91,7 +92,7 @@
     <div class="modal-header">
       <p>Editar el siguiente plazo fijo: </p>
     </div>
-
+    <!-- Tipo -->
     <div class="recuadro-input">
       <label for="">Tipo:</label>
       <select class="input-modal-edit" ng-model="pfToUpdate.tipo" name="" id="">
@@ -99,18 +100,22 @@
         <option value="Trad.">Trad.</option>
       </select>
     </div>
+    <!-- Plazo -->
     <div class="recuadro-input">
       <label for="">Plazo:</label>
       <input type="text" class="input-modal-edit" ng-model="pfToUpdate.plazo" name="" id="">
     </div>
+    <!-- Fecha de Alta -->
     <div class="recuadro-input">
       <label for="">Fecha Alta:</label>
       <input type="text" class="input-modal-edit" ng-model="pfToUpdate.fechaAlta" name="" id="">
     </div>
+    <!-- Fecha de Acreditacion -->
     <div class="recuadro-input">
       <label for="">Fecha Acreditación:</label>
       <input type="text" class="input-modal-edit" ng-model="pfToUpdate.fechaAcred" name="" id="">
     </div>
+    <!-- Activo -->
     <div class="recuadro-input">
       <label for="">Activo:</label>
       <select class="input-modal-edit" ng-model="pfToUpdate.activo" name="" id="">
@@ -118,19 +123,22 @@
         <option value="true">Sí</option>
       </select>
     </div>
+    <!-- Monto Inicial -->
     <div class="recuadro-input">
       <label for="">Monto Inicial:</label>
       <input type="text" class="input-modal-edit" ng-model="pfToUpdate.qInicial" name="" id="">
     </div>
+    <!-- Monto Recibido -->
     <div class="recuadro-input">
       <label for="">Monto Recibido:</label>
       <input type="text" class="input-modal-edit" ng-model="pfToUpdate.qRecibido" name="" id="">
     </div>
+    <!-- Intereses -->
     <div class="recuadro-input">
       <label for="">Intereses:</label>
       <input type="text" class="input-modal-edit" ng-model="pfToUpdate.intereses" name="" id="">
     </div>
-    
+    <!-- Botones -->
     <div>
       <button class="boton" ng-click="modalUpdate(false)">Cancelar</button>
       <button class="boton" ng-click="actualizarPlazoFijo()">Actualizar</button>
@@ -141,7 +149,7 @@
     <div class="modal-header">
       <p>Complete los campos para el nuevo plazo fijo:</p>
     </div>
-
+    <!-- Tipo -->
     <div class="recuadro-input">
       <label for="nuevo-pf-tipo">Tipo:</label>
       <select class="input-modal-edit" ng-model="nuevoPF.tipo" name="nuevo-pf-tipo" id="nuevo-pf-tipo">
@@ -150,30 +158,37 @@
         <option value="UVA">UVA</option>
       </select>
     </div>
+    <!-- Plazo -->
     <div class="recuadro-input">
       <label for="nuevo-pf-plazo">Plazo:</label>
       <input type="number" class="input-modal-edit" ng-model="nuevoPF.plazo" name="nuevo-pf-plazo" id="nuevo-pf-plazo">
     </div>
+    <!-- Fecha de Alta -->
     <div class="recuadro-input">
       <label for="nuevo-pf-fecha-alta">Fecha de Alta:</label>
       <input type="date" class="input-modal-edit" ng-model="nuevoPF.fechaAlta" name="nuevo-pf-fecha-alta" id="nuevo-pf-fecha-alta">
     </div>
+    <!-- Monto Inicial -->
     <div class="recuadro-input">
       <label for="nuevo-pf-qinicial">Monto Inicial:</label>
       <input type="text" class="input-modal-edit" ng-model="nuevoPF.qInicial" name="nuevo-pf-qinicial" id="nuevo-pf-qinicial">
     </div>
+    <!-- Fecha de Acreditacion -->
     <div class="recuadro-input">
       <label for="nuevo-pf-fecha-acred">Fecha de Acred.:</label>
       <input type="date" class="input-modal-edit" ng-model="nuevoPF.fechaAcred" name="nuevo-pf-fecha-acred" id="nuevo-pf-fecha-acred">
     </div>
+    <!-- Monto Recibido -->
     <div class="recuadro-input">
       <label for="nuevo-pf-qrecibido">Monto Recibido:</label>
       <input type="text" class="input-modal-edit" ng-model="nuevoPF.qRecibido" name="nuevo-pf-qrecibido" id="nuevo-pf-qrecibido">
     </div>
+    <!-- Intereses -->
     <div class="recuadro-input">
       <label for="nuevo-pf-intereses">Intereses:</label>
       <input type="text" class="input-modal-edit" ng-model="nuevoPF.intereses" name="nuevo-pf-intereses" id="nuevo-pf-intereses">
     </div>
+    <!-- Activo -->
     <div class="recuadro-input">
       <label for="nuevo-pf-activo">Activo:</label>
       <select class="input-modal-edit" ng-model="nuevoPF.activo" name="nuevo-pf-activo" id="nuevo-pf-activo">
@@ -182,6 +197,7 @@
         <option value="true">Sí</option>
       </select>
     </div>
+    <!-- Botones -->
     <div>
       <button class="boton" ng-click="modalAdd(false)">Cancelar</button>
       <button class="boton" ng-click="limpiarCampos()">Borrar</button>
