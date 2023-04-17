@@ -16,10 +16,10 @@ const getPagos = require('./controllers/pagos/getPagos.js')
 const addPago = require('./controllers/pagos/addPago.js')
 const updatePago = require('./controllers/pagos/updatePago.js')
 const deletePago = require('./controllers/pagos/deletePago.js')
-const getPlazosFijos = require('./controllers/plazos-fijos/getPlazosFijos.js')
-const addPlazoFijo = require('./controllers/plazos-fijos/addPlazoFijo.js')
-const updatePlazoFijo = require('./controllers/plazos-fijos/updatePlazoFijo.js')
-const deletePlazoFijo = require('./controllers/plazos-fijos/deletePlazoFijo.js')
+// const getPlazosFijos = require('./controllers/plazos-fijos/getPlazosFijos.js')
+// const addPlazoFijo = require('./controllers/plazos-fijos/addPlazoFijo.js')
+// const updatePlazoFijo = require('./controllers/plazos-fijos/updatePlazoFijo.js')
+// const deletePlazoFijo = require('./controllers/plazos-fijos/deletePlazoFijo.js')
 
 app.get('/', (req, res) => {
   res.sendFile('./index.html', { root: './public' });
@@ -33,10 +33,10 @@ app.post('/pagos/', addPago);
 app.put('/pagos/:id', updatePago);
 app.delete('/pagos/:id', deletePago);
 
-app.get('/plazos-fijos/', getPlazosFijos);
-app.post('/plazos-fijos/', addPlazoFijo);
-app.put('/plazos-fijos/:id', updatePlazoFijo);
-app.delete('/plazos-fijos/:id', deletePlazoFijo);
+// app.get('/plazos-fijos/', getPlazosFijos);
+// app.post('/plazos-fijos/', addPlazoFijo);
+// app.put('/plazos-fijos/:id', updatePlazoFijo);
+// app.delete('/plazos-fijos/:id', deletePlazoFijo);
 
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);
