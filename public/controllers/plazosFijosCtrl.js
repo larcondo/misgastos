@@ -92,9 +92,10 @@ app.controller('plazosFijosCtrl', function($scope, $http, $rootScope) {
       fecha.getDate().toString().padStart(2,'0');
   }
 
-  $scope.calcularPorcentajeInteres = (interesString, montoString) => {
-    const interes = parseFloat(interesString.replace('.', '').replace(',', '.'));
-    const monto = parseFloat(montoString.replace('.', '').replace(',', '.'));
+  $scope.calcularPorcentajeInteres = (interes, monto) => {
+    
+    // const interes = parseFloat(interesString.replace('.', '').replace(',', '.'));
+    // const monto = parseFloat(montoString.replace('.', '').replace(',', '.'));
 
     return (( interes / monto ) * 100).toFixed(2);
   };
@@ -105,6 +106,10 @@ app.controller('plazosFijosCtrl', function($scope, $http, $rootScope) {
     return '$ ' + valor;
 
   };
+
+  $scope.numberToCurrency = ( num ) => {
+    return '$ ' + num.toLocaleString('es-AR', {minimumFractionDigits: 2});
+  }
 
   // MODALES
   $scope.modalDelete = function( visible, objeto ) {
@@ -194,16 +199,17 @@ app.controller('plazosFijosCtrl', function($scope, $http, $rootScope) {
     if ( orden ) {
       arreglo.sort( function(a,b) {
         // Cambio de "." por "," ya que parseFloat considera separador decimal al "."
-        let numA = (a[campo] === '') ? 0 : parseFloat(a[campo].replace('.','').replace(',','.'));
-        let numB = (b[campo] === '') ? 0 : parseFloat(b[campo].replace('.','').replace(',','.'));
-        return numA - numB;
+        // let numA = (a[campo] === '') ? 0 : parseFloat(a[campo].replace('.','').replace(',','.'));
+        // let numB = (b[campo] === '') ? 0 : parseFloat(b[campo].replace('.','').replace(',','.'));
+        // return numA - numB;
+        return a[campo] - b[campo];
       })
     } else {
       arreglo.sort( function(a,b) {
         // Cambio de "." por "," ya que parseFloat considera separador decimal al "."
-        let numA = (a[campo] === '') ? 0 : parseFloat(a[campo].replace('.','').replace(',','.'));
-        let numB = (b[campo] === '') ? 0 : parseFloat(b[campo].replace('.','').replace(',','.'));
-        return numB - numA;
+        // let numA = (a[campo] === '') ? 0 : parseFloat(a[campo].replace('.','').replace(',','.'));
+        // let numB = (b[campo] === '') ? 0 : parseFloat(b[campo].replace('.','').replace(',','.'));
+        return b[campo] - a[campo];
       })
     }
     return !orden;

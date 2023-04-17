@@ -12,7 +12,7 @@
   <div class="contenedor-filtros">
     
     <div class="filtro">
-      <label for="selectFiltroTipo">Filtro 1</label>
+      <label for="selectFiltroTipo">Tipo:</label>
       <select ng-model="filtros.tipo" ng-change="filtrar()" name="selectFiltroTipo" id="selectFiltroTipo">
         <option value=""></option>
         <option value="UVA">UVA</option>
@@ -20,11 +20,11 @@
       </select>
     </div>
     <div class="filtro">
-      <label for="selectFiltroActivo">Filtro 2</label>
+      <label for="selectFiltroActivo">Estado:</label>
       <select ng-model="filtros.activo" ng-change="filtrar()" name="selectFiltroActivo" id="selectFiltroActivo">
         <option value=""></option>
-        <option value="true">Activo</option>
-        <option value="false">Finalizado</option>
+        <option ng-Value="true">Activo</option>
+        <option ng-Value="false">Finalizado</option>
       </select>
     </div>
     <div class="info-resultados">
@@ -54,11 +54,11 @@
         <td>{{ plazo.plazo }}</td>
         <td>{{ plazo.fechaAlta }}</td>
         <td>{{ plazo.fechaAcred }}</td>
-        <td>{{ ( plazo.qInicial !== "" ) ? ( '$ ' + plazo.qInicial ) : '' }}</td>
-        <td>{{ ( plazo.qRecibido !== "" ) ? ( '$ ' + plazo.qRecibido ) : '' }}</td>
-        <td>{{ ( plazo.intereses !== "" ) ? ( '$ ' + plazo.intereses ) : '' }}</td>
-        <td>{{ ( plazo.qInicial !== '' && plazo.intereses !== '' ) ? '% ' + calcularPorcentajeInteres( plazo.intereses, plazo.qInicial ) : '' }}</td>
-        <td>{{ ( plazo.activo === 'true' ) ? 'Sí' : 'No' }}</td>
+        <td>{{ ( plazo.qInicial ) ? numberToCurrency(plazo.qInicial) : '' }}</td>
+        <td>{{ ( plazo.qRecibido ) ? numberToCurrency(plazo.qRecibido) : '' }}</td>
+        <td>{{ ( plazo.intereses ) ? numberToCurrency(plazo.intereses) : '' }}</td>
+        <td>{{ ( plazo.qInicial && plazo.intereses ) ? '% ' + calcularPorcentajeInteres( plazo.intereses, plazo.qInicial ) : '' }}</td>
+        <td>{{ ( plazo.activo ) ? 'Sí' : 'No' }}</td>
         <td class="celda-botones" style="padding: 0;">
           <button class="boton-tabla boton-delete" ng-click="modalDelete(true, plazo)" title="Eliminar Entrada"><i class="bi bi-trash-fill"></i></button>
           <button class="boton-tabla boton-update" ng-click="modalUpdate(true, plazo)" title="Actualizar Entrada"><i class="bi bi-pencil-fill"></i></button>
@@ -171,7 +171,7 @@
     <!-- Monto Inicial -->
     <div class="recuadro-input">
       <label for="nuevo-pf-qinicial">Monto Inicial:</label>
-      <input type="text" class="input-modal-edit" ng-model="nuevoPF.qInicial" name="nuevo-pf-qinicial" id="nuevo-pf-qinicial">
+      <input type="number" class="input-modal-edit" ng-model="nuevoPF.qInicial" name="nuevo-pf-qinicial" id="nuevo-pf-qinicial" step="0.01" min="0">
     </div>
     <!-- Fecha de Acreditacion -->
     <div class="recuadro-input">
@@ -181,12 +181,12 @@
     <!-- Monto Recibido -->
     <div class="recuadro-input">
       <label for="nuevo-pf-qrecibido">Monto Recibido:</label>
-      <input type="text" class="input-modal-edit" ng-model="nuevoPF.qRecibido" name="nuevo-pf-qrecibido" id="nuevo-pf-qrecibido">
+      <input type="number" class="input-modal-edit" ng-model="nuevoPF.qRecibido" name="nuevo-pf-qrecibido" id="nuevo-pf-qrecibido">
     </div>
     <!-- Intereses -->
     <div class="recuadro-input">
       <label for="nuevo-pf-intereses">Intereses:</label>
-      <input type="text" class="input-modal-edit" ng-model="nuevoPF.intereses" name="nuevo-pf-intereses" id="nuevo-pf-intereses">
+      <input type="number" class="input-modal-edit" ng-model="nuevoPF.intereses" name="nuevo-pf-intereses" id="nuevo-pf-intereses">
     </div>
     <!-- Activo -->
     <div class="recuadro-input">
