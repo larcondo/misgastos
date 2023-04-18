@@ -105,7 +105,7 @@
 .contenedor-filtros {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   padding: 0 0;
   width: 90%;
@@ -142,7 +142,14 @@
   font-family: 'Work Sans', sans-serif;
 }
 
-
+.contenedor-acciones {
+  display: flex;
+  flex-flow: row wrap;
+  /* justify-content: space-between; */
+  justify-content: flex-end;
+  width: 90%;
+  margin: 0 auto;
+}
 
 .info-resultados{
   width: 200px;
@@ -152,7 +159,7 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  height: 100%;
+  /* height: 100%; */
 }
 
 .boton-add {

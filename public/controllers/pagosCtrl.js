@@ -1,6 +1,9 @@
 app.controller('pagosCtrl', function($scope, $http, $rootScope) {
   $rootScope.wActive = 1;
 
+  $scope.months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+  $scope.years = ['2022', '2023'];
+
   $scope.sortOrders = {
     fecha: false, importe: false
   }
@@ -10,7 +13,13 @@ app.controller('pagosCtrl', function($scope, $http, $rootScope) {
 
   $scope.sumaImporte = 0;
 
-  $scope.filtros = { tipo: '', detalle: '', observaciones: '' }
+  $scope.filtros = { 
+    tipo: '', 
+    detalle: '', 
+    observaciones: '', 
+    year: null, 
+    month: null 
+  }
 
   $scope.filtroDetalle = [];
   $scope.filtroTipo = [];
@@ -223,7 +232,23 @@ app.controller('pagosCtrl', function($scope, $http, $rootScope) {
     const filtrado3 = filtrado2.filter((element) => {
       return element.observaciones.toLowerCase().includes($scope.filtros.observaciones.toLowerCase());
     });
-    $scope.pagosData = filtrado3;
+
+    let filtrado4 = filtrado3;
+
+    if ($scope.filtros.year) {
+      filtrado4 = filtrado3.filter( element => {
+        return element.fecha.substring(0, 4) === $scope.filtros.year;
+      })
+    }
+    let filtrado5 = filtrado4
+
+    if ($scope.filtros.month) {
+      filtrado5 = filtrado4.filter( element => {
+        return element.fecha.substring(5,7) === $scope.filtros.month;
+      })
+    }
+
+    $scope.pagosData = filtrado5;
 
     $scope.sumaImporte = sumarImportes( $scope.pagosData );
   };

@@ -8,30 +8,50 @@
   <div class="contenedor-filtros">
     
     <div class="filtro">
-      <label for="">Filtro 1</label>
-      <select name="" id="" ng-model="filtros.tipo" ng-change="filtrar()">
+      <label for="">Tipo:</label>
+      <select name="" id="" ng-model="filtros.tipo" ng-change="filtrar()" style="width: 80px;">
         <option value="{{op}}" ng-repeat="op in filtroTipo track by $index">{{ op }}</option>
       </select>
     </div>
     <div class="filtro">
-      <label for="">Filtro 2</label>
+      <label for="">Detalle:</label>
       <select name="" id="" ng-model="filtros.detalle" ng-change="filtrar()">
         <option value="{{op}}" ng-repeat="op in filtroDetalle track by $index">{{ op }}</option>
       </select>
     </div>
     <div class="filtro">
-      <label for="">Filtro 3</label>
+      <label for="">Observaciones:</label>
       <input type="text" name="filtroObs" id="filtroObs" ng-model="filtros.observaciones" ng-change="filtrar()">
     </div>
+    <div class="filtro">
+      <label for="">Año:</label>
+      <select name="" id="" ng-model="filtros.year" ng-change="filtrar()" style="width: 60px; text-align: center;">
+        <option value=""></option>
+        <option value="{{y}}" ng-repeat="y in years track by $index">{{ y }}</option>
+      </select>
+    </div>
+    <div class="filtro">
+      <label for="">Mes:</label>
+      <select name="" id="" ng-model="filtros.month" ng-change="filtrar()" style="width: 60px; text-align: center;">
+        <option value=""></option>
+        <option value="{{m}}" ng-repeat="m in months track by $index">{{ m }}</option>
+      </select>
+    </div>
+    
+  
+    
+  </div>
+  
+  <div class="contenedor-acciones">
     <div class="info-resultados">
       <p style="margin: 0; font-size: 0.8rem;">Resultados: {{ pagosData.length }}</p>
       <p style="margin: 0; font-size: 0.8rem;">Total: {{ numberToCurrency(sumaImporte) }}</p>
     </div>
-  
     <div class="contenedor-botones">
       <button ng-click="modalAdd(true)" class="boton-add" title="Nuevo Pago">+</button>
     </div>
-  </div>  
+  </div>
+  
 
   <div class="contenedor-tabla">
     <table class="tabla-pagos">
