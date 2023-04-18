@@ -4,6 +4,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/public/images/pago_x64.png" type="image/x-icon">
+
   <!-- AngularJS -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
@@ -31,27 +34,28 @@
   <div ng-app="myApp" ng-controller="mainCtrl" class="contenedor-principal">
     <div class="contenedor-encabezado">
       <h1>Mis Pagos</h1>
-      <h3 style="text-align: right; padding: 0 50px;" ng-bind="user.name"></h3>
+      <!-- <h3 style="text-align: right; padding: 0 50px;" ng-bind="user.name"></h3> -->
+      <h3 style="text-align: right; padding: 0 50px;"><i class="bi bi-person-circle"></i> <span ng-bind="user.name"></span></h3>
     </div>   
 
     <div class="contenedor-navegador">
       <a href="#/" class="{{ (wActive === 0 ? 'active' : '') }}">
-        Home
+        <i class="bi bi-house-door-fill"></i> Home
       </a>
       <a href="#!pagos" class="{{ (wActive === 1 ? 'active' : '') }}">
-        Pagos
+        <i class="bi bi-credit-card-2-back-fill"></i> Pagos
       </a>
       <a href="#!plazosfijos" class="{{ (wActive === 2 ? 'active' : '') }}">
-        Plazos Fijos
+        <i class="bi bi-credit-card-2-back-fill"></i> Plazos Fijos
       </a>
       <a href="#!login" class="{{ (wActive === 3 ? 'active' : '') }}" ng-show="user.name === null">
-        Login
+        <i class="bi bi-person-fill"></i> Login
       </a>
       <a href="#!config" class="{{ (wActive === 4 ? 'active' : '') }}" ng-show="user.name !== null">
-        Configuraciones
+        <i class="bi bi-gear-fill"></i> Config
       </a>
       <a href="#!logout" class="{{ (wActive === 5 ? 'active' : '') }}" ng-show="user.name !== null">
-        Logout
+        <i class="bi bi-box-arrow-left"></i> Logout
       </a>
     </div>
     
