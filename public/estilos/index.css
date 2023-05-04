@@ -18,6 +18,7 @@ body, html {
 .contenedor-encabezado {
   /* background-color: lightblue; */
   background-color: #efefef;
+  background-color: hsl(240, 38%, 84%);
   margin: 0;
   grid-area: span 1 / span 10;
 }
@@ -53,7 +54,7 @@ body, html {
   /* background-color: hsl(120, 73%, 72%); */
   /* border-right: 4px solid hsl(120, 73%, 45%); */
   background-color: hsl(240, 38%, 54%);
-  border-right: 4px solid hsl(240, 38%, 34%);;
+  border-right: 4px solid hsl(240, 38%, 34%);
   color: #e5e5e5;
 }
 .contenedor-navegador .active:hover {
@@ -80,6 +81,11 @@ body, html {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+}
+
+.encabezado-usuario {
+  text-align: right;
+  padding: 0 50px;
 }
 
 .titulo {
@@ -148,13 +154,13 @@ body, html {
 }
 
 .input-modal-edit{
-  /* background-color: #454599; */
   text-align: right;
   padding: 2px 6px;
   margin: 4px 0;
   border-radius: 4px;
   border: 1px solid #9d9d9d;
   width: 40%;
+  font-family: 'Work Sans', sans-serif;
 }
 
 
