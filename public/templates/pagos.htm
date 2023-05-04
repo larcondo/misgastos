@@ -5,6 +5,20 @@
 <div ng-show="user.name !== null">
   <h1 class="titulo">Pagos</h1>
   
+  <div class="contenedor-acciones">
+    <div class="info-resultados">
+      <span>
+        <span class="info-entradas-valor">{{ pagosData.length }}</span> <span class="info-entradas">entradas</span>
+      </span>
+      <span>
+        <span class="info-total-valor">{{ numberToCurrency(sumaImporte) }}</span> <span class="info-total">total</span>
+      </span>
+    </div>
+    <div class="contenedor-botones">
+      <button ng-click="modalAdd(true)" class="boton-add" title="Nuevo Pago">+</button>
+    </div>
+  </div>
+
   <div class="contenedor-filtros">
     
     <div class="filtro">
@@ -20,7 +34,7 @@
       </select>
     </div>
     <div class="filtro">
-      <label for="">Observaciones:</label>
+      <label for="filtroObs">Observaciones:</label>
       <input type="text" name="filtroObs" id="filtroObs" ng-model="filtros.observaciones" ng-change="filtrar()">
     </div>
     <div class="filtro">
@@ -41,17 +55,6 @@
   
     
   </div>
-  
-  <div class="contenedor-acciones">
-    <div class="info-resultados">
-      <p style="margin: 0; font-size: 0.8rem;">Resultados: {{ pagosData.length }}</p>
-      <p style="margin: 0; font-size: 0.8rem;">Total: {{ numberToCurrency(sumaImporte) }}</p>
-    </div>
-    <div class="contenedor-botones">
-      <button ng-click="modalAdd(true)" class="boton-add" title="Nuevo Pago">+</button>
-    </div>
-  </div>
-  
 
   <div class="contenedor-tabla">
     <table class="tabla-pagos">
