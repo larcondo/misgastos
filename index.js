@@ -21,12 +21,20 @@ const addPlazoFijo = require('./controllers/plazos-fijos/addPlazoFijo.js')
 const updatePlazoFijo = require('./controllers/plazos-fijos/updatePlazoFijo.js')
 const deletePlazoFijo = require('./controllers/plazos-fijos/deletePlazoFijo.js')
 
+const updateFirstName = require('./controllers/auth/updateFirstName.js')
+const updateLastName = require('./controllers/auth/updateLastName.js')
+const updateEmail = require('./controllers/auth/updateEmail.js')
+
 app.get('/', (req, res) => {
   res.sendFile('./index.html', { root: './public' });
 });
 
 app.post('/login', handleLogin) 
 app.post('/register', validarUserInfo, handleRegister)
+
+app.post('/config/firstName/', updateFirstName)
+app.post('/config/lastName/', updateLastName)
+app.post('/config/email/', updateEmail)
 
 app.get('/pagos/', checkUser, getPagos);
 app.post('/pagos/', addPago);
