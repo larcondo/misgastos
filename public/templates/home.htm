@@ -1,11 +1,10 @@
-<h1>Hola, {{ user.firstName }}!</h1>
+<h1 ng-show="user.firstName">Hola, {{ user.firstName }}!</h1>
 
 <div style="font-size: 0.75em">
 
   <p>Generales:</p>
   <ul>
     <li>Implementar Auth Users</li>
-    <li>Actualizar información de usuario desde "Configuraciones"</li>
     <li>Realizar backup de los valores almacenados hasta el momento en csv e implementar en nodejs una tarea que inserte dichos
       datos en la BD de mongoDB (con el formato de numero y fecha corregido si hace falta).
     </li>
@@ -15,7 +14,7 @@
 
   <p>Pagos:</p>
   <ul>
-    <li>Corregir Update (se actualiza la tabla si se modifica en el modal) </li>
+    <li>Revisar codigo para emprolijar</li>
   </ul>
 
 </div>
