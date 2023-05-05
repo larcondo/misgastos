@@ -5,26 +5,107 @@
     <tr><td>Nombre de Usuario:</td><td ng-bind="user.name"></td><td></td></tr>
     <tr><td>Nombre:</td><td ng-bind="user.firstName"></td>
       <td>
-        <button class="boton-tabla boton-update" title="Modificar Nombre">
+        <button class="boton-tabla boton-update" title="Modificar Nombre" ng-click="modalConfigFName(true)">
           <i class="bi bi-pencil-fill"></i>
         </button>
       </td>
     </tr>
     <tr><td>Apellido:</td><td ng-bind="user.lastName"></td>
       <td>
-        <button class="boton-tabla boton-update" title="Modificar Apellido">
+        <button class="boton-tabla boton-update" title="Modificar Apellido" ng-click="modalConfigLName(true)">
           <i class="bi bi-pencil-fill"></i>
         </button>
       </td>
     </tr>
     <tr><td>E-mail:</td><td ng-bind="user.email"></td>
       <td>
-        <button class="boton-tabla boton-update" title="Modificar E-mail">
+        <button class="boton-tabla boton-update" title="Modificar E-mail" ng-click="modalConfigEmail(true)">
           <i class="bi bi-pencil-fill"></i>
         </button>
       </td>
     </tr>
     <tr><td>Rol:</td><td ng-bind="user.role"></td><td></td></tr>
   </table>
+
+  <div class="modal" id="modal-config-fname" ng-show="displayModal.fname">
+    <div class="modal-header">
+      <p>Actualizar nombre de usuario</p>
+    </div>
+
+    <table>
+      <tr><td>Nombre actual:</td><td>{{user.firstName}}</td></tr>
+      <tr>
+        <td>Nombre nuevo:</td>
+        <td style="padding: 0;">
+          <input type="text" name="config-fname-input" id="config-fname-input" tabindex="1" ng-model="newFirstName">
+        </td>
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td style="padding: 0;">
+          <input type="password" name="config-fname-pass" id="config-fname-pass" tabindex="2" ng-model="password">
+        </td>
+      </tr>
+    </table>
+    
+    <div>
+      <button class="boton" ng-click="modalConfigFName(false)">Cancelar</button>
+      <button class="boton" ng-click="actualizarFName()">Actualizar</button>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-config-lname" ng-show="displayModal.lname">
+    <div class="modal-header">
+      <p>Actualizar apellido de usuario</p>
+    </div>
+
+    <table>
+      <tr><td>Apellido actual:</td><td>{{user.lastName}}</td></tr>
+      <tr>
+        <td>Apellido nuevo:</td>
+        <td style="padding: 0;">
+          <input type="text" name="config-lname-input" id="config-lname-input" tabindex="1" ng-model="newLastName">
+        </td>
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td style="padding: 0;">
+          <input type="password" name="config-lname-pass" id="config-lname-pass" tabindex="2" ng-model="password">
+        </td>
+      </tr>
+    </table>
+    
+    <div>
+      <button class="boton" ng-click="modalConfigLName(false)">Cancelar</button>
+      <button class="boton" ng-click="actualizarLName()">Actualizar</button>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-config-email" ng-show="displayModal.email">
+    <div class="modal-header">
+      <p>Actualizar e-mail de usuario</p>
+    </div>
+
+    <table>
+      <tr><td>E-mail actual:</td><td>{{user.email}}</td></tr>
+      <tr>
+        <td>E-mail nuevo:</td>
+        <td style="padding: 0;">
+          <input type="text" name="config-email-input" id="config-email-input" tabindex="1" ng-model="newEmail">
+        </td>
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td style="padding: 0;">
+          <input type="password" name="config-email-pass" id="config-email-pass" tabindex="2" ng-model="password">
+        </td>
+      </tr>
+    </table>
+    
+    <div>
+      <button class="boton" ng-click="modalConfigEmail(false)">Cancelar</button>
+      <button class="boton" ng-click="actualizarEmail()">Actualizar</button>
+    </div>
+  </div>
 
 </div>

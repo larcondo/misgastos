@@ -9,6 +9,8 @@ function updateFirstName(req, res) {
   const firstName = req.body.firstName
   const userName = req.body.userName
 
+  console.log(req.headers['authorization'])
+
   if (!req.body.firstName) {
     res.status(400).send({ message: 'firstName REQUERIDO' })
     return
