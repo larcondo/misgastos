@@ -136,7 +136,7 @@ app.controller('pagosCtrl', function($scope, $http, $rootScope) {
   $scope.modalUpdate = ( visible, id ) => {
     if (visible) {
       $scope.index = $scope.pagosData.findIndex( element => element._id === id );
-      $scope.tempPago = $scope.pagosData[$scope.index];
+      $scope.tempPago = {...$scope.pagosData[$scope.index]};
       $scope.tempPago_fecha = new Date($scope.pagosData[$scope.index].fecha + "T03:00:00.000");
       $scope.displayModal.update = true;
     } else {
