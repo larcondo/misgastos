@@ -1,0 +1,58 @@
+<div ng-show="user.name === null || user.name === undefined">
+  <p style="text-align: center;">Por favor, loguearse para ver las grágicas.</p>
+</div>
+
+<div ng-show="user.name !== null">
+  <h1 class="titulo">Gráficas</h1>
+
+  <div class="contenedor-botones-detalle">
+    <button ng-repeat="detalle in detalles" ng-click="changeBarData(detalle)" class="boton-grafico-detalle">
+      {{ detalle }}
+    </button>  
+  </div> 
+
+  <div class="contenedor-grafico">
+    
+    <canvas id="myChart" class="chart"></canvas>
+    
+    <table class="graficos-tabla">
+      <tr>
+        <th>Fecha</th>
+        <th>Importe</th>
+        <th>Diferencia</th>
+      </tr>
+      <tr ng-repeat="data in barData">
+        <td>{{ data.fecha }}</td>
+        <td>$ {{ data.importe }}</td>
+        <td class="{{ data.diff > 0 ? 'letra-roja' : '' }}">
+          {{ data.diff > 0 ? '+' : '' }}{{ data.diff }} %</td>
+      </tr>
+    </table>
+
+    
+  </div>
+  
+  <div class="contenedor-pie">
+    
+    <div class="contenedor-select-pie">
+      <section>
+        <span>Año:</span>
+        <select name="select-year" id="pie-select-year" ng-model="pieActFilter.year" ng-change="changeYear(pieActFilter.year)">
+          <option value={{obj.year}} ng-repeat="obj in pieFilters">{{obj.year}}</option>
+        </select>
+      </section>
+      <section>
+        <span>Mes:</span>
+        <select name="select-mes" id="pie-select-mes" ng-model="pieActFilter.month" ng-change="updatePieChart()">
+          <option value={{m}} ng-repeat="m in pieMeses">{{ getMonthString(m) }}</option>
+        </select>
+      </section>
+      
+    </div>
+    
+    <!-- Grafico tipo Pie/Doughnut -->
+    <canvas id="pieChart" class="chart"></canvas>
+
+  </div>
+  
+</div>
