@@ -29,7 +29,11 @@ app.get('/', (req, res) => {
   res.sendFile('./index.html', { root: './public' });
 });
 
-app.post('/login', handleLogin) 
+app.get('/home', (req, res) => {
+  res.sendFile('./home.html', { root: './public' });
+})
+
+app.post('/', handleLogin) 
 app.post('/register', validarUserInfo, handleRegister)
 
 app.post('/config/firstName/', updateFirstName)
