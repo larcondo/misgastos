@@ -11,10 +11,17 @@ async function handleRegister(req, res) {
     userInfo.password = hashedPass
     
     mp_insertOne('usermng', userInfo)
-    .then(() => res.send({ message: 'Usuario registrado correctamente'}))
-    .catch(() => res.send({ message: 'Hubo un error al registrar el usuario'}))
+    .then(() => {
+      res.status(201)
+      res.send({ message: 'Usuario registrado correctamente'})
+    })
+    .catch(() => {
+      res.status(500)
+      res.send({ message: 'Hubo un error al registrar el usuario'})
+    })
 
   } catch {
+    res.status(500)
     res.send({ message: 'Hubo un error al registrar el usuario'})
   }
 }

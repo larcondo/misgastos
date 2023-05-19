@@ -15,7 +15,8 @@ function getPagos(req, res) {
       res.send(resOrdenado.filter(element => element.user === user));
     })
     .catch((error) => {
-      res.send({ message: 'Hubo un error.'});
+      res.status(500)
+      res.send({ message: `Hubo un error al obtener los paros del usuario ${user}.`})
     })
 }
 
