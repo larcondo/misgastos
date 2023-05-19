@@ -6,6 +6,6 @@ app.controller('logoutCtrl', function($scope, $rootScope, $http, $window) {
       $rootScope.user[key] = null
     }
     sessionStorage.clear()
-    $window.location.href = '#!login'
+    $window.location.href = '/'
   }
 })
