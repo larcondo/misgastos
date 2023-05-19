@@ -6,7 +6,6 @@
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="/public/images/pago_x64.png" type="image/x-icon">
-
   <!-- AngularJS -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
@@ -16,130 +15,42 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
 
+  <style>
+    body {
+      font-family: 'Work Sans', sans-serif;
+    }
+  </style>
+
   <!-- Estilos -->
-  <link rel="stylesheet" href="/public/estilos/index.css">
-  <link rel="stylesheet" href="/public/estilos/pagos.css">
-  <link rel="stylesheet" href="/public/estilos/plazosfijos.css">
   <link rel="stylesheet" href="/public/estilos/login.css">
-  <link rel="stylesheet" href="/public/estilos/logout.css">
-  <link rel="stylesheet" href="/public/estilos/config.css">
-  <link rel="stylesheet" href="/public/estilos/register.css">
-  <link rel="stylesheet" href="/public/estilos/graficas.css">
 
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-
-  <!-- Chart js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js" integrity="sha512-OD9Gn6cAUQezuljS6411uRFr84pkrCtw23Hl5TYzmGyD0YcunJIPSBDzrV8EeCiFxGWWvtJOfVo5pOgB++Jsag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/1.0.0/chartjs-plugin-datalabels.min.js" integrity="sha512-XulchVN83YTvsOaBGjLeApZuasKd8F4ZZ28/aMHevKjzrrjG0lor+T4VU248fWYMNki3Eimk+uwdlQS+uZmu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <title>Mis Pagos</title>
+  <title>Start</title>
 </head>
 <body>
-  <div ng-app="myApp" ng-controller="mainCtrl" class="contenedor-principal">
-    <div class="contenedor-encabezado">
-      <h1>Mis Pagos</h1>
-      <h3 class="encabezado-usuario" ng-show="user.name"><i class="bi bi-person-circle"></i> <span ng-bind="user.name"></span></h3>
-    </div>   
-
-    <div class="contenedor-navegador">
-      <a href="#/" class="{{ (wActive === 0 ? 'active' : '') }}">
-        <i class="bi bi-house-door-fill"></i> Home
-      </a>
-      <a href="#!pagos" class="{{ (wActive === 1 ? 'active' : '') }}">
-        <i class="bi bi-credit-card-2-back-fill"></i> Pagos
-      </a>
-      <a href="#!graficas" class="{{ (wActive === 6 ? 'active' : '') }}">
-        <i class="bi bi-bar-chart-line-fill"></i> Graficas
-      </a>
-      <a href="#!plazosfijos" class="{{ (wActive === 2 ? 'active' : '') }}">
-        <i class="bi bi-credit-card-2-back-fill"></i> Plazos Fijos
-      </a>
-      <a href="#!login" class="{{ (wActive === 3 ? 'active' : '') }}" ng-show="user.name === null">
-        <i class="bi bi-person-fill"></i> Login
-      </a>
-      <a href="#!config" class="{{ (wActive === 4 ? 'active' : '') }}" ng-show="user.name !== null">
-        <i class="bi bi-gear-fill"></i> Config
-      </a>
-      <a href="#!logout" class="{{ (wActive === 5 ? 'active' : '') }}" ng-show="user.name !== null">
-        <i class="bi bi-box-arrow-left"></i> Logout
-      </a>
-    </div>
+  <div ng-app="myApp" ng-controller="loginCtrl">
     
-    <!-- Rutas (Paginas) -->
-    <div ng-view class="contenedor-rutas"></div>
+    <h1 class="login-title">Login</h1>
 
-    <div class="contenedor-footer">
-      <p>Creado por: Lucas</p>
+    <div class="login-form">
+      <div class="login-campo">
+        <input type="text" 
+          name="username" id="login-username" placeholder="User name" ng-model="loginData.name" ng-change="userChange()">
+        <p class="login-error-text">{{ errorTexts.user }}</p>
+      </div>
+      <div class="login-campo">
+        <input type="password" name="password" id="login-password" placeholder="Password" ng-model="loginData.password" ng-change="passwordChange()">
+        <p class="login-error-text">{{ errorTexts.password }}</p>
+      </div>
+      <button class="login-boton" ng-click="login()">Loguearse</button>
+      <p class="login-foot-text">¿No tienes un usuario aún? <a href="http://localhost:3000/user">Regístrate!</a></p>
     </div>
 
   </div>
-
+  
   <script>
     var app = angular.module('myApp', ["ngRoute"]);
-
-    app.run(function($rootScope) {
-      $rootScope.wActive = null;
-      $rootScope.user = {
-        name: null, token: null, email: null, firstName: null, lastName: null, role: null
-      }
-      
-      for(let key in $rootScope.user){
-        if (sessionStorage.getItem(key) !== undefined) $rootScope.user[key] = sessionStorage.getItem(key)
-      }
-      
-    });
-
-    app.controller('mainCtrl', function($scope, $http, $rootScope){
-      
-    });
-    
-    app.config(['$routeProvider', function($routeProvider){
-      $routeProvider
-      .when('/',{
-        templateUrl: "./public/templates/home.htm",
-        controller: "homeCtrl"
-      })
-      .when('/pagos',{
-        templateUrl: "./public/templates/pagos.htm",
-        controller: "pagosCtrl"
-      })
-      .when('/plazosfijos',{
-        templateUrl: "./public/templates/plazosfijos.htm",
-        controller: "plazosFijosCtrl"
-      })
-      .when('/graficas',{
-        templateUrl: "./public/templates/graficas.htm",
-        controller: "graficasCtrl"
-      })
-      .when('/register',{
-        templateUrl: "./public/templates/register.htm",
-        controller: "registerCtrl"
-      })
-      .when('/login',{
-        templateUrl: "./public/templates/login.htm",
-        controller: "loginCtrl"
-      })
-      .when('/config',{
-        templateUrl: "./public/templates/config.htm",
-        controller: "configCtrl"
-      })      
-      .when('/logout',{
-        templateUrl: "./public/templates/logout.htm",
-        controller: "logoutCtrl"
-      });
-
-    }]);
-
   </script>
-  <script src="./public/controllers/homeCtrl.js"></script>
-  <script src="./public/controllers/pagosCtrl.js"></script>
-  <script src="./public/controllers/plazosFijosCtrl.js"></script>
-  <script src="./public/controllers/loginCtrl.js"></script>
-  <script src="./public/controllers/registerCtrl.js"></script>
-  <script src="./public/controllers/configCtrl.js"></script>
-  <script src="./public/controllers/logoutCtrl.js"></script>
-  <script src="./public/controllers/graficasCtrl.js"></script>
 
+  <script src="./public/controllers/loginCtrl.js"></script>
 </body>
 </html>
