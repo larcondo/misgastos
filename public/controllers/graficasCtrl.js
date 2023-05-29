@@ -43,7 +43,9 @@ app.controller('graficasCtrl', function($scope, $rootScope, $http, $window){
         });
 
         $scope.pieFilters.sort((a,b) => a.year - b.year);
-        // console.log($scope.pieFilters)
+        console.log($scope.pieFilters)
+
+        $scope.pieMeses = $scope.pieFilters[0].meses
 
         $scope.pieData = $scope.pagosData.filter( element => {
           return element.fecha.substr(5,2) === '05' && element.tipo === 'pago'
@@ -261,6 +263,8 @@ app.controller('graficasCtrl', function($scope, $rootScope, $http, $window){
       pieColors.push('hsl(240, 38%, ' + ((i+1) / (dataArray.length+1))*100 + '%)')
     }
 
+    console.log(pieColors)
+
     const datos = {
       labels: dataArray.map( e => e.detalle ),
       datasets: [{
@@ -343,6 +347,15 @@ app.controller('graficasCtrl', function($scope, $rootScope, $http, $window){
   }
 
   function refreshPieChart(dataArray, titulo) {
+
+    let pieColors = []
+    let i;
+    for(i = 0; i < dataArray.length; i++) {
+      pieColors.push('hsl(240, 38%, ' + ((i+1) / (dataArray.length+1))*100 + '%)')
+    }
+
+    $scope.graficoPie.data.datasets[0].backgroundColor = pieColors
+
     $scope.graficoPie.data.labels = []
     $scope.graficoPie.data.datasets[0].data = []
     $scope.graficoPie.data.labels = dataArray.map(e => e.detalle)
