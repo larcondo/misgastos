@@ -1,6 +1,6 @@
 // Base de datos
 const { MongoClient, ObjectId } = require('mongodb');
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb://lucas:4141Lucas@localhost:27017';
 const client = new MongoClient(url);
 var dbName = 'mispagos';
 
