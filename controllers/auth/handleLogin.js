@@ -13,6 +13,7 @@ function handleLogin(req, res) {
         // El usuario no está registrado
         res.status(400)
         res.send({ error: 'user', message: 'El usuario con ese nombre NO existe!'})
+        return
       }
       
       try {
