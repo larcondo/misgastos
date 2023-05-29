@@ -56,9 +56,6 @@
       <a href="#!config" class="{{ (wActive === 4 ? 'active' : '') }}" ng-show="user.name !== null">
         <i class="bi bi-gear-fill"></i> Config
       </a>
-      <a href="#!logout" class="{{ (wActive === 5 ? 'active' : '') }}" ng-show="user.name !== null">
-        <i class="bi bi-box-arrow-left"></i> Logout
-      </a>
     </div>
     
     <!-- Rutas (Paginas) -->
@@ -83,7 +80,7 @@
         if (sessionStorage.getItem(key) !== undefined) $rootScope.user[key] = sessionStorage.getItem(key)
       }
       
-      console.log($rootScope.user)
+      // console.log($rootScope.user)
 
     });
 
@@ -112,10 +109,6 @@
       .when('/config',{
         templateUrl: "./public/templates/config.htm",
         controller: "configCtrl"
-      })      
-      .when('/logout',{
-        templateUrl: "./public/templates/logout.htm",
-        controller: "logoutCtrl"
       });
 
     }]);

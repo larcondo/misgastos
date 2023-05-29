@@ -129,5 +129,13 @@ app.controller('configCtrl', function($scope, $rootScope, $http, $window) {
     $scope.newEmail = null;
   }
 
+  $scope.logout = () => {
+    for (let key in $rootScope.user) {
+      $rootScope.user[key] = null
+    }
+    sessionStorage.clear()
+    $window.location.href = '/'
+  }
+
 
 })

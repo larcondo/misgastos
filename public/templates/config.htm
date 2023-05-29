@@ -27,6 +27,14 @@
     <tr><td>Rol:</td><td ng-bind="user.role"></td><td></td></tr>
   </table>
 
+  <div>
+    <h1 class="titulo">Log Out</h1>
+
+    <div class="logout-form">
+      <button ng-click="logout()" class="logout-boton">Desloguearse</button>
+    </div>
+  </div>
+
   <div class="modal" id="modal-config-fname" ng-show="displayModal.fname">
     <div class="modal-header">
       <p>Actualizar nombre de usuario</p>
