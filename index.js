@@ -33,6 +33,10 @@ app.get('/home', (req, res) => {
   res.sendFile('./home.html', { root: './public' });
 })
 
+app.get('/register', (req, res) => {
+  res.sendFile('./register.html', { root: './public' });
+})
+
 app.post('/', handleLogin) 
 app.post('/register', validarUserInfo, handleRegister)
 

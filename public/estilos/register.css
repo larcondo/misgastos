@@ -1,3 +1,11 @@
+body {
+  font-family: 'Work Sans', sans-serif;
+}
+
+.titulo {
+  text-align: center;
+}
+
 .register-form {
   width: 300px;
   margin: 20px auto;
@@ -26,20 +34,14 @@
   background-color: #bbb;
 }
 
-.register-campo input[type="text"] {
-  font-family: 'Work Sans', sans-serif;
-  width: 240px;
-  padding: 4px;
-}
-.register-campo input[type="email"] {
-  font-family: 'Work Sans', sans-serif;
-  width: 240px;
-  padding: 4px;
-}
+.register-campo input[type="text"], 
+.register-campo input[type="email"],
 .register-campo input[type="password"] {
   font-family: 'Work Sans', sans-serif;
   width: 240px;
-  padding: 4px;
+  padding: 0.5em 0.75em;
+  border: 1px solid;
+  border-radius: 0.8rem;
 }
 
 .register-error-text {

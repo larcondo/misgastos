@@ -38,7 +38,10 @@ app.controller('registerCtrl', function($scope, $rootScope, $window, $http) {
       .then((response) => {
         console.log(response.status)
         console.log(response)
-        $window.location.href = '#!login'
+        if (response.status === 201) {
+          alert('Usuario creado')
+          $window.location.href = '/'
+        }
       })
       .catch((e) => {
         console.log(e.status)
