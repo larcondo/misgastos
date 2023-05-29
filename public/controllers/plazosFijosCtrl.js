@@ -3,7 +3,7 @@ app.controller('plazosFijosCtrl', function($scope, $http, $rootScope) {
 
   $scope.plazosFijosData = [];
   $scope.nuevoPF = {
-    tipo: '', plazo: 0, fechaAlta: '', fechaAcred: '', qInicial: '0',
+    tipo: '', plazo: 0, fechaAlta: '', fechaAcred: '', qInicial: '',
     qRecibido: '', intereses: '', activo: ''
   };
 
