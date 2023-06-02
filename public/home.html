@@ -61,6 +61,12 @@
     <!-- Rutas (Paginas) -->
     <div ng-view class="contenedor-rutas"></div>
 
+    <div class="alert-msg" id="alerta">
+      <button ng-click="closeAlert()">X</button>
+      <!-- <p>Error: File Not Found.</p> -->
+      <p>{{ alerta.message }}</p>
+    </div>
+
     <div class="contenedor-footer">
       <p>Creado por: Lucas</p>
     </div>
@@ -73,19 +79,74 @@
     app.run(function($rootScope) {
       $rootScope.wActive = null;
       $rootScope.user = {
-        name: null, token: null, email: null, firstName: null, lastName: null, role: null
+        name: null, 
+        firstName: null, 
+        lastName: null, 
+        email: null, 
+        role: null
       }
+      $rootScope.userToken = null;
       
+      // Se inicializan los valores a partir del sessionStorage
       for(let key in $rootScope.user){
         if (sessionStorage.getItem(key) !== undefined) $rootScope.user[key] = sessionStorage.getItem(key)
       }
       
-      // console.log($rootScope.user)
+      console.log($rootScope.user);
+
+      $rootScope.alerta = { message: 'Mensaje inicial.' }
 
     });
 
     app.controller('mainCtrl', function($scope, $http, $rootScope){
       
+      // Funcion utilizada para refrescar el token al no ser una SPA y el login estar en
+      // una pagina separada
+      // Modificación realizada para almacenar token en memoria y no en cookie o sessionStorage
+      $scope.getToken = () => {
+        req = { method: 'POST', url: 'http://localhost:3000/token' }
+        $http(req)
+        .then(function(response) {
+          if(response.status === 200) {
+            $rootScope.userToken = response.data.accessToken;
+            setTimeout( () => {
+              console.log(`El token expiró ${response.data.expiresIn} segs.`)
+              renovarToken()
+            }, response.data.expiresIn * 1000 - 1000)
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          alert('Error al validar token del usuario.');
+        })
+      }
+
+      $scope.getToken();
+
+      function renovarToken() {
+        $scope.getToken();
+      };
+
+      const alerta = document.getElementById('alerta');
+      
+      // Con el evento scroll ajusto la altura de la alerta
+      document.addEventListener('scroll', () => {
+        alerta.style.top = window.scrollY + 24;
+      })
+
+      $rootScope.showAlert = ( msg ) => {
+        // $rootScope.alerta.message = '404 - File Not Found!';
+        $rootScope.alerta.message = msg;
+        alerta.style.top = window.scrollY + 10;
+        alerta.style.display = 'flex';
+        // setTimeout(() => alerta.style.display = 'none', 1000);
+      }
+
+      $rootScope.closeAlert = () => {
+        alerta.style.display = 'none';
+        $rootScope.alerta.message = '';
+      }
+
     });
     
     app.config(['$routeProvider', function($routeProvider){
@@ -117,9 +178,9 @@
   <script src="./public/controllers/homeCtrl.js"></script>
   <script src="./public/controllers/pagosCtrl.js"></script>
   <script src="./public/controllers/plazosFijosCtrl.js"></script>
-  <script src="./public/controllers/registerCtrl.js"></script>
+  <!-- <script src="./public/controllers/registerCtrl.js"></script> -->
   <script src="./public/controllers/configCtrl.js"></script>
-  <script src="./public/controllers/logoutCtrl.js"></script>
+  <!-- <script src="./public/controllers/logoutCtrl.js"></script> -->
   <script src="./public/controllers/graficasCtrl.js"></script>
 
 </body>

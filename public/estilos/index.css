@@ -176,6 +176,38 @@ body, html {
   display: flex;
 }
 
+.alert-msg {
+  background-color: lightcoral;
+  /* padding: 0 1em; */
+  position: absolute;
+  top: 24px;
+  left: 25%;
+  width: 50%;
+  max-width: 50%;
+  display: none;
+  border-radius: 10px;
+  flex-flow: column wrap;
+  box-shadow: 0 10px 20px gray;
+  z-index: 1;
+}
+
+.alert-msg p {
+  margin: 0.5em;
+  /* background-color: blue; */
+  padding: 0 1em;
+}
+
+.alert-msg button {
+  /* width: 20%; */
+  align-self: flex-end;
+  background-color: transparent;
+  margin: 0.5em;
+}
+
+.alert-msg button:hover {
+  cursor: pointer;
+}
+
 @media screen and ( max-width: 1200px ) {
   .contenedor-navegador {
     grid-area: span 1 / span 10;

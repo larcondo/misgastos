@@ -17,7 +17,7 @@ app.controller('graficasCtrl', function($scope, $rootScope, $http, $window){
 
   $scope.getPagos = () => {
     if ($rootScope.user.name === null || $rootScope.user.name === undefined) return
-    var req = { method: 'GET', url: 'http://localhost:3000/pagos', headers: { 'Authorization': $rootScope.user.name } }
+    var req = { method: 'GET', url: 'http://localhost:3000/pagos', headers: { 'Authorization': `BEARER ${$rootScope.user.token}` } }
     $http(req)
     .then(function(response) {
       if (response.status === 200) {
@@ -83,15 +83,44 @@ app.controller('graficasCtrl', function($scope, $rootScope, $http, $window){
         initPieChart($scope.pieData, "Mes de Mayo")
       }
     })
-    .catch((response) => {
-      console.log(response)
-      console.log(response.data.error)
+    .catch((err) => {
+      if (err.status === 403) {
+        // alert('Refresh Token!!')
+        logout();
+      }
+      console.log(err)
+      console.log(err.data.error)
     });
 
     return;
   }
 
   $scope.getPagos();
+
+  function logout() {
+    const req = {
+      method: 'DELETE',
+      url: 'http://localhost:3000/logout',
+      headers: {'Content-Type': 'application/json'},
+      data: $rootScope.user
+    }
+    
+    $http(req)
+    .then( response => {
+      console.log(response)
+      if (response.status === 200) {
+        for (let key in $rootScope.user) {
+          $rootScope.user[key] = null
+        }
+        sessionStorage.clear()
+        $window.location.href = '/'
+      }
+    })
+    .catch( error => {
+      console.log(error)
+      alert(error.status + ' - Error: ' + error.data.message)
+    }) 
+  }
 
   $scope.initChart = (dataArray, titulo) => {
     const barColor = "#454599"

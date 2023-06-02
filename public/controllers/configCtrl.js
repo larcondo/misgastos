@@ -130,11 +130,29 @@ app.controller('configCtrl', function($scope, $rootScope, $http, $window) {
   }
 
   $scope.logout = () => {
-    for (let key in $rootScope.user) {
-      $rootScope.user[key] = null
+
+    const req = {
+      method: 'DELETE',
+      url: 'http://localhost:3000/logout',
+      headers: {'Content-Type': 'application/json'},
+      data: $rootScope.user
     }
-    sessionStorage.clear()
-    $window.location.href = '/'
+    
+    $http(req)
+    .then( response => {
+      console.log(response)
+      if (response.status === 200) {
+        for (let key in $rootScope.user) {
+          $rootScope.user[key] = null
+        }
+        sessionStorage.clear()
+        $window.location.href = '/'
+      }
+    })
+    .catch( error => {
+      console.log(error)
+      alert(error.status + ' - Error: ' + error.data.message)
+    })    
   }
 
 

@@ -30,15 +30,6 @@ app.controller('loginCtrl', function($scope, $rootScope, $http, $window) {
   }
 
   function setUserData(userObj) {
-    // $rootScope.user = {
-    //   name: userObj.name,
-    //   token: null,
-    //   email: userObj.email,
-    //   firstName: userObj.firstName,
-    //   lastName: userObj.lastName,
-    //   role: userObj.role
-    // }
-
     sessionStorage.setItem('name', userObj.name)
     sessionStorage.setItem('email', userObj.email)
     sessionStorage.setItem('firstName', userObj.firstName)

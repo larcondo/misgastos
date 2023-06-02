@@ -1,6 +1,7 @@
-var { mp_findAll } = require('../../database.js')
+var { mp_findAll, mp_insertOne } = require('../../database.js')
 const bcrypt = require('bcrypt')
 const getUserData = require('../../helpers/getUserData.js')
+const { generateAccessToken, generateRefreshToken } = require('../../helpers/generateTokens.js')
 
 function handleLogin(req, res) {
   
@@ -19,8 +20,22 @@ function handleLogin(req, res) {
       try {
         if( await bcrypt.compare(user.password, userData.password)){
           // success
+          const accessToken = generateAccessToken({ name: user.name })
+          const refreshToken = generateRefreshToken({ name: user.name })
+
+          // Guardar en BD el refresh token
+          mp_insertOne('refreshtokens', { name: user.name, refreshToken: refreshToken })
+          .catch( err => console.log(err))
+
           const {_id, password, ...info} = userData
-          res.send({ message: 'Login successfull', info})
+          // refresh token
+          res.cookie('jwtr', refreshToken, { 
+            httpOnly: true, 
+            secure: true, 
+            maxAge: 60 * 60 * 1000 
+          });
+          // access token
+          res.send({ message: 'Login successfull', accessToken: accessToken, info})
         } else {
           // Not allowed
           res.status(401)

@@ -1,7 +1,9 @@
 var { mp_findAll } = require('../../database.js')
 
 function getPagos(req, res) {
-  const user = req.headers['authorization']
+  // const user = req.headers['authorization']
+  const user = req.user
+  // console.log(user)
 
   mp_findAll('pagos')
     .then((resultado) => {
@@ -12,7 +14,7 @@ function getPagos(req, res) {
         return bDate - aDate;
       });
       
-      res.send(resOrdenado.filter(element => element.user === user));
+      res.send(resOrdenado.filter(element => element.user === user.name));
     })
     .catch((error) => {
       res.status(500)

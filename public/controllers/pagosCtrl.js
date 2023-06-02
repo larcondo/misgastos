@@ -27,34 +27,37 @@ app.controller('pagosCtrl', function($scope, $http, $rootScope) {
 
   $scope.getPagos = () => {
     if ($rootScope.user.name === null || $rootScope.user.name === undefined) return
-    var req = { method: 'GET', url: 'http://localhost:3000/pagos', headers: { 'Authorization': $rootScope.user.name } }
+    var req = { method: 'GET', url: 'http://localhost:3000/pagos', headers: { 'Authorization': `BEARER ${$rootScope.userToken}` } }
     $http(req)
     .then(function(response) {
       if (response.status === 200) {
-        $scope.pagosData = response.data;
-        $scope.backupData = response.data;
-        $scope.filtroDetalle = [];
-        $scope.filtroTipo = [];
-        $scope.pagosData.forEach( (element) => {
-          if (!$scope.filtroDetalle.includes(element.detalle)) { $scope.filtroDetalle.push(element.detalle)};
-          if (!$scope.filtroTipo.includes(element.tipo)) { $scope.filtroTipo.push(element.tipo)};
-          return;
-        })
-        $scope.filtroDetalle.unshift('');
-        $scope.filtroTipo.unshift('');
-        $scope.filtrar();
-
-        $scope.sumaImporte = sumarImportes( $scope.pagosData );
-    
+        inicializarData(response.data);    
       }
     })
-    .catch((response) => {
-      console.log(response)
-      console.log(response.data.error)
+    .catch((err) => {
+      console.log(err)
+      logout();
     });
 
     return;
   }      
+
+  function inicializarData(resData) {
+    $scope.pagosData = resData;
+    $scope.backupData = resData;
+    $scope.filtroDetalle = [];
+    $scope.filtroTipo = [];
+    $scope.pagosData.forEach( (element) => {
+      if (!$scope.filtroDetalle.includes(element.detalle)) { $scope.filtroDetalle.push(element.detalle)};
+      if (!$scope.filtroTipo.includes(element.tipo)) { $scope.filtroTipo.push(element.tipo)};
+      return;
+    })
+    $scope.filtroDetalle.unshift('');
+    $scope.filtroTipo.unshift('');
+    $scope.filtrar();
+
+    $scope.sumaImporte = sumarImportes( $scope.pagosData );
+  }
 
   $scope.getPagos();
 
@@ -77,29 +80,53 @@ app.controller('pagosCtrl', function($scope, $http, $rootScope) {
         user: $rootScope.user.name
       }
 
-    var req = { method: 'POST', url: 'http://localhost:3000/pagos/', headers: {'Content-Type': 'application/json'}, data: data }
+    var req = { 
+      method: 'POST', 
+      url: 'http://localhost:3000/pagos/', 
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `BEARER ${$rootScope.userToken}`
+      }, 
+      data: data 
+    }
     
     $http(req)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         $scope.getPagos();
         $scope.modalAdd(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        // la notificacion de error
+        $rootScope.showAlert(error.data);
+        $scope.modalAdd(false);
+        console.log(error);
+      });
     
   };
 
   $scope.eliminarPago = (id) => {
     // console.log('Se eliminará el pago con id: ' + id);
-    var req = { method: 'DELETE', url: 'http://localhost:3000/pagos/' + id }
     // $http.delete("http://localhost:3000/pagos/"+id)
+    var req = { 
+      method: 'DELETE', 
+      url: 'http://localhost:3000/pagos/' + id,
+      headers: {
+        'Authorization': `BEARER ${$rootScope.userToken}`
+      },
+    }
     $http(req)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         $scope.getPagos();        
         $scope.modalDelete(false);
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        // la notificacion de error
+        $rootScope.showAlert(error.data);
+        $scope.modalDelete(false);
+        console.log(error);
+      })
     
   }
 
@@ -111,16 +138,53 @@ app.controller('pagosCtrl', function($scope, $http, $rootScope) {
     
     data.fecha = $scope.tempPago_fecha.toISOString().substring(0,10);
     
-    var req = { method: 'PUT', url: 'http://localhost:3000/pagos/' + $scope.tempPago._id,
-      headers: {'Content-Type': 'application/json'}, data: data }
+    var req = { 
+      method: 'PUT', 
+      url: 'http://localhost:3000/pagos/' + $scope.tempPago._id,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `BEARER ${$rootScope.userToken}`
+      }, 
+      data: data 
+    }
 
     $http(req)
       .then((response) => {
         $scope.getPagos();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        // la notificacion de error
+        $rootScope.showAlert(error.data);
+        console.log(error);
+      });
 
     $scope.modalUpdate(false);
+  }
+
+  function logout() {
+    
+    const req = {
+      method: 'DELETE',
+      url: 'http://localhost:3000/logout',
+      headers: {'Content-Type': 'application/json'},
+      data: $rootScope.user
+    }
+    
+    $http(req)
+    .then( response => {
+      console.log(response)
+      if (response.status === 200) {
+        for (let key in $rootScope.user) {
+          $rootScope.user[key] = null
+        }
+        sessionStorage.clear()
+        $window.location.href = '/'
+      }
+    })
+    .catch( error => {
+      console.log(error)
+      alert(error.status + ' - Error: ' + error.data.message)
+    }) 
   }
 
   // MODALES
