@@ -54,7 +54,18 @@ async function mp_deleteOne(collectionName, id) {
   return resultado;
 };
 
+async function mp_delete(collectionName, objDelete) {
+  await client.connect();
+  // console.log('Conneccted successfully to: ' + url);
+  const db = client.db(dbName);
+  const collection = db.collection(collectionName);
+
+  const resultado = await collection.deleteOne(objDelete);
+  
+  return resultado;
+};
+
 module.exports = {
   mp_findAll, mp_insertOne, mp_deleteOne,
-  mp_updateOne
+  mp_updateOne, mp_delete
 }
