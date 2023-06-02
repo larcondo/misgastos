@@ -2,6 +2,7 @@ app.controller('plazosFijosCtrl', function($scope, $http, $rootScope) {
   $rootScope.wActive = 2;
 
   $scope.plazosFijosData = [];
+  $scope.totals = { uva: 0, trad: 0 }
   $scope.nuevoPF = {
     tipo: '', plazo: 0, fechaAlta: '', fechaAcred: '', qInicial: '',
     qRecibido: '', intereses: '', activo: ''
@@ -21,6 +22,11 @@ app.controller('plazosFijosCtrl', function($scope, $http, $rootScope) {
       $scope.plazosFijosData = response.data;
       $scope.backupData = response.data;
       $scope.filtrar();
+
+      const uvas = $scope.plazosFijosData.filter( e => (e.tipo === 'UVA' && e.activo))
+      const trad = $scope.plazosFijosData.filter( e => (e.tipo === 'Trad.' && e.activo))
+      $scope.totals.uva = uvas.reduce( (acc, cv) => acc + cv.qInicial, 0)
+      $scope.totals.trad = trad.reduce( (acc, cv) => acc + cv.qInicial, 0)
     });
     return;
   }
