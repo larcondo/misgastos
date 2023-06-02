@@ -34,6 +34,21 @@
       <button ng-click="modalAdd(true)" class="boton-add" title="Nuevo Plazo Fijo">+</button>
     </div>
   </div>
+
+  <div style="background-color: transparent; width: 90%; margin: 0 auto; padding: 0.5em 0em; display: flex; gap: 3em;">
+    <span>
+      <span class="info-total-valor">{{ numberToCurrency(totals.uva + totals.trad) }}</span>
+      <span class="info-total">Total Activo</span>
+    </span>
+    <span>
+      <span class="info-total-valor">{{ numberToCurrency(totals.uva) }}</span>
+      <span class="info-total">UVA</span>
+    </span>
+    <span>
+      <span class="info-total-valor">{{ numberToCurrency(totals.trad) }}</span> 
+      <span class="info-total">Tradicional</span>
+    </span>
+  </div>
   
   <div class="contenedor-tabla">
     <table class="tabla-plazos-fijos">
@@ -119,8 +134,10 @@
     <div class="recuadro-input">
       <label for="">Activo:</label>
       <select class="input-modal-edit" ng-model="pfToUpdate.activo" name="" id="">
-        <option value="false">No</option>
-        <option value="true">Sí</option>
+        <!-- <option value="false">No</option>
+        <option value="true">Sí</option> -->
+        <option ng-value="false" ng-selected="!pfToUpdate.activo">No</option>
+        <option ng-value="true" ng-selected="pfToUpdate.activo">Sí</option>
       </select>
     </div>
     <!-- Monto Inicial -->
@@ -192,9 +209,9 @@
     <div class="recuadro-input">
       <label for="nuevo-pf-activo">Activo:</label>
       <select class="input-modal-edit" ng-model="nuevoPF.activo" name="nuevo-pf-activo" id="nuevo-pf-activo">
-        <option value=""></option>
-        <option value="false">No</option>
-        <option value="true">Sí</option>
+        <option ng-value=""></option>
+        <option ng-value="false" ng-selected="!nuevoPF.activo">No</option>
+        <option ng-value="true" ng-selected="nuevoPF.activo">Sí</option>
       </select>
     </div>
     <!-- Botones -->
